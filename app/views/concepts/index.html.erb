@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Concepts</h1>
+
+<div id="concepts">
+  <% @concepts.each do |concept| %>
+    <%= render concept %>
+    <p>
+      <%= link_to "Show this concept", concept %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New concept", new_concept_path %>

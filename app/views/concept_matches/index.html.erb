@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Concept matches</h1>
+
+<div id="concept_matches">
+  <% @concept_matches.each do |concept_match| %>
+    <%= render concept_match %>
+    <p>
+      <%= link_to "Show this concept match", concept_match %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New concept match", new_concept_match_path %>

@@ -1,0 +1,37 @@
+<%= form_with(model: concept) do |form| %>
+  <% if concept.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(concept.errors.count, "error") %> prohibited this concept from being saved:</h2>
+
+      <ul>
+        <% concept.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :obo_class, style: "display: block" %>
+    <%= form.text_field :obo_class %>
+  </div>
+
+  <div>
+    <%= form.label :label, style: "display: block" %>
+    <%= form.text_field :label %>
+  </div>
+
+  <div>
+    <%= form.label :definition, style: "display: block" %>
+    <%= form.text_area :definition %>
+  </div>
+
+  <div>
+    <%= form.label :rdf_template, style: "display: block" %>
+    <%= form.text_area :rdf_template %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

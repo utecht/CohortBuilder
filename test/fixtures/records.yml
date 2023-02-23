@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  patient: one
+  field: one
+  string_value: MyString
+  option: one
+  int_value: 1
+  float_value: 1.5
+  date_value: 2023-02-10
+
+two:
+  type: 
+  patient: two
+  field: two
+  string_value: MyString
+  option: two
+  int_value: 1
+  float_value: 1.5
+  date_value: 2023-02-10

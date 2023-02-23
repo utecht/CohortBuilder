@@ -1,0 +1,17 @@
+<div id="<%= dom_id document %>">
+  <p>
+    <strong>Preview:</strong>
+    <%= document.preview %>
+  </p>
+
+  <p>
+    <strong>Collection:</strong>
+    <%= document.collection_id %>
+  </p>
+
+  <p>
+    <strong>File:</strong>
+    <%= link_to document.file.filename, document.file if document.file.attached? %>
+  </p>
+
+</div>

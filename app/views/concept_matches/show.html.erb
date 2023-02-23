@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @concept_match %>
+
+<div>
+  <%= link_to "Edit this concept match", edit_concept_match_path(@concept_match) %> |
+  <%= link_to "Back to concept matches", concept_matches_path %>
+
+  <%= button_to "Destroy this concept match", @concept_match, method: :delete %>
+</div>

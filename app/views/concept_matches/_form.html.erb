@@ -1,0 +1,32 @@
+<%= form_with(model: concept_match) do |form| %>
+  <% if concept_match.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(concept_match.errors.count, "error") %> prohibited this concept_match from being saved:</h2>
+
+      <ul>
+        <% concept_match.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :concept_id, style: "display: block" %>
+    <%= form.text_field :concept_id %>
+  </div>
+
+  <div>
+    <%= form.label :option_id, style: "display: block" %>
+    <%= form.text_field :option_id %>
+  </div>
+
+  <div>
+    <%= form.label :comment, style: "display: block" %>
+    <%= form.text_area :comment %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

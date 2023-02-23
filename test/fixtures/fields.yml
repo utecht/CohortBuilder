@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  example: 
+  stats: 
+  description: MyText
+  document: one
+
+two:
+  type: 
+  example: 
+  stats: 
+  description: MyText
+  document: two
