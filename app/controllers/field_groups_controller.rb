@@ -14,17 +14,16 @@ class FieldGroupsController < ApplicationController
   # GET /field_groups/new
   def new
     @field_group = FieldGroup.new
-    @documents = Document.all
   end
 
   # GET /field_groups/1/edit
   def edit
-    @documents = Document.all
   end
 
   # POST /field_groups or /field_groups.json
   def create
     @field_group = FieldGroup.new(field_group_params)
+    puts params[:field_group][:fields]
 
     respond_to do |format|
       if @field_group.save
@@ -72,6 +71,6 @@ class FieldGroupsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def field_group_params
-      params.require(:field_group).permit(:name, :description, :document_id)
+      params.require(:field_group).permit(:name, :description, :document_id, field_ids: [])
     end
 end

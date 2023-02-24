@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+.checkcollection {
+    display: grid;
+    grid-template-columns: [first] 2em [second] auto [end];
+}
+
+.checkcollection label {
+    grid-column-start: second;
+    grid-column-end: end;
+}
+
+.checkcollection input {
+    grid-column-start: first;
+    grid-column-end: second;
+}

@@ -9,7 +9,8 @@
     <tr>
       <th>Name</th>
       <th>CType</th>
-      <th>Processed</th>
+      <th>Group</th>
+      <th>Loaded</th>
       <th>Edit</th>
       <th>Load</th>
     </tr>
@@ -19,7 +20,8 @@
   <tr>
     <td><%= field.name %></td>
     <td><%= field.ctype %></td>
-    <td><%= field.processed %></td>
+    <td><% if field.field_group %><%= link_to "Group", field.field_group %><% end %></td>
+    <td><% if field.processed %>✅<% end %></td>
     <td><%= link_to "Edit", edit_field_path(field) %></td>
     <td><%= button_to "Load", create_records_path(field) %></td>
   </tr>

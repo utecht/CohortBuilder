@@ -34,4 +34,11 @@
     <%= field.processed %>
   </p>
 
+  <% if field.field_group %>
+  <p>
+    <strong>Field Group:</strong>
+    <%= field.field_group.name %>
+  </p>
+  <% end %>
+
 </div>

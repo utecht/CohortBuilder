@@ -14,4 +14,11 @@
     <%= field_group.document_id %>
   </p>
 
+  <p>
+    <strong>Fields:</strong>
+  </p>
+  <% field_group.fields.each do |field| %>
+  <p><%= link_to field.name, field %></p>
+  <% end %>
+
 </div>

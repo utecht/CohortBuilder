@@ -3,7 +3,7 @@
 <%= render @field_group %>
 
 <div>
-  <%= link_to "Edit this field group", edit_field_group_path(@field_group) %> |
+  <%= link_to "Edit this field group", edit_document_field_group_path(@field_group, @field_group.document) %> |
   <%= link_to "Back to field groups", field_groups_path %>
 
   <%= button_to "Destroy this field group", @field_group, method: :delete %>
