@@ -1,5 +1,7 @@
+require 'csv'
+
 class DocumentsController < ApplicationController
-  before_action :set_document, only: %i[ show edit update destroy ]
+  before_action :set_document, only: %i[ show edit update destroy process_csv ]
 
   # GET /documents or /documents.json
   def index
@@ -54,6 +56,21 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to documents_url, notice: "Document was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def process_csv
+    @document.fields.destroy_all
+    csv = CSV.parse(@document.file.download, headers: true)
+    csv.headers.each do |header|
+      field = Field.new(name: header, document: @document)
+      field.save
+    end
+    @document.processed = true
+    @document.save
+    respond_to do |format|
+      format.html { redirect_to document_url(@document), notice: "All fields processed." }
+      format.json { render :show, status: :ok, location: @document }
     end
   end
 

@@ -11,4 +11,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "collections#index"
+  post '/documents/:id/process_csv', to: 'documents#process_csv', as: :process_csv
 end

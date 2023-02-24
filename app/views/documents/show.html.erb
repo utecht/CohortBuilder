@@ -2,6 +2,30 @@
 
 <%= render @document %>
 
+<%= button_to "Process Fields", process_csv_path(@document) %>
+
+<h4>Fields</h4>
+<table id="fields">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Processed</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @document.fields.each do |field| %>
+  <tr>
+    <td><%= field.name %></td>
+    <td><%= field.type %></td>
+    <td><%= field.processed %></td>
+    <td><%= link_to "Edit", edit_field_path(field) %></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+
 <div>
   <%= link_to "Edit this document", edit_document_path(@document) %> |
   <%= link_to "Back to documents", documents_path %>
