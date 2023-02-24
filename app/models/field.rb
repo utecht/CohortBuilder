@@ -17,7 +17,7 @@ class Field < ApplicationRecord
     when "date"
       DateRecord.new(patient: patient, date_value: value.to_date, string_value: value, field: self).save
     when "boolean"
-      checked = value.downcase in ["checked", "yes"]
+      checked = ["checked", "yes"].include? value.downcase
       BooleanRecord.new(patient: patient, boolean_value: checked, string_value: value, field: self).save
     when "option"
       option = Option.find_or_create_by(field: self, value: value)

@@ -1,5 +1,6 @@
 class CohortBuilderApiController < ApplicationController
   before_action :set_field, only: %i[ api_query api_query_calc api_query_date ]
+  before_action :set_field_group, only: %i[ api_query_fg ]
 
 	def ret_collection(collection)
 		{
@@ -55,14 +56,33 @@ class CohortBuilderApiController < ApplicationController
 		}
 	end
 
+	def ret_fg_choice(field)
+		{
+			value: field.id,
+			label: field.description? ? field.description : field.name
+		}
+	end
+
+	def ret_group_fields(field_group)
+		{
+			choices: field_group.fields.map { |field| ret_fg_choice(field) },
+			type: "radio",
+			api: "api_query_fg/#{field_group.id}",
+			name: field_group.description? ? field_group.description : field_group.name,
+			label: field_group.name
+		}
+	end
+
 	def config_api
 		ret = []
-		option_fields = Field.where(ctype: 'option')
+		option_fields = Field.where(ctype: 'option', processed: true)
 		ret += option_fields.map { |field| ret_field(field) }
-		float_fields = Field.where(ctype: ['float', 'int'])
+		float_fields = Field.where(ctype: ['float', 'int'], processed: true)
 		ret += float_fields.map { |field| ret_float_field(field) }
-		date_fields = Field.where(ctype: 'date')
+		date_fields = Field.where(ctype: 'date', processed: true)
 		ret += date_fields.map { |field| ret_date_field(field) }
+		field_groups = FieldGroup.all.map { |fieldgroup| ret_group_fields(fieldgroup) }
+		ret += field_groups
 		render json: ret
 	end
 
@@ -70,6 +90,15 @@ class CohortBuilderApiController < ApplicationController
 		ret = Hash.new
 		params[:uris].split(',').each do |uri|
 			records = OptionRecord.where(field: @field, option_id: uri)
+			ret[uri] = records.map { |optr| optr.patient.patient_id }
+		end
+		render json: ret
+	end
+
+	def api_query_fg
+		ret = Hash.new
+		params[:uris].split(',').each do |uri|
+			records = BooleanRecord.where(field: @field_group.fields, field_id: uri, boolean_value: true)
 			ret[uri] = records.map { |optr| optr.patient.patient_id }
 		end
 		render json: ret
@@ -87,7 +116,7 @@ class CohortBuilderApiController < ApplicationController
 				ret[record.value] << record.patient.patient_id
 			end
 		end
-		render json: ret
+		render json: ret.sort.to_h
 	end
 
 	def api_query_date
@@ -102,7 +131,7 @@ class CohortBuilderApiController < ApplicationController
 				ret[record.value] << record.patient.patient_id
 			end
 		end
-		render json: ret
+		render json: ret.sort.to_h
 	end
 
 	def api_data
@@ -113,5 +142,9 @@ class CohortBuilderApiController < ApplicationController
 	private
 	def set_field
 		@field = Field.find(params[:id])
+	end
+
+	def set_field_group
+		@field_group = FieldGroup.find(params[:id])
 	end
 end

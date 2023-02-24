@@ -45,4 +45,13 @@ class FieldTest < ActiveSupport::TestCase
     assert_equal Record.last.class, BooleanRecord
     assert Record.last.value
   end
+
+  test "expect to create false boolean record" do
+    patient = patients(:one)
+    field = fields(:one)
+    field.ctype = 'boolean'
+    field.create_record(patient, "Unchecked")
+    assert_equal Record.last.class, BooleanRecord
+    assert_equal Record.last.value, false
+  end
 end

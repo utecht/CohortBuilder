@@ -10,6 +10,6 @@ class Document < ApplicationRecord
   end
 
   def unaligned_fields
-    self.fields.where(field_group_id: nil)
+    self.fields.where(field_group_id: nil, ctype: "boolean")
   end
 end

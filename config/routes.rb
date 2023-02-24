@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get '/semapi/collections', to: 'cohort_builder_api#collections', as: :api_collections
   get '/semapi/config', to: 'cohort_builder_api#config_api', as: :api_config
   get '/semapi/data/api_query/:id', to: 'cohort_builder_api#api_query', as: :api_query
+  get '/semapi/data/api_query_fg/:id', to: 'cohort_builder_api#api_query_fg', as: :api_query_fg
   get '/semapi/data/api_query_calc/:id', to: 'cohort_builder_api#api_query_calc', as: :api_query_calc
   get '/semapi/data/api_query_date/:id', to: 'cohort_builder_api#api_query_date', as: :api_query_date
   get '/semapi/data', to: 'cohort_builder_api#api_data', as: :api_data
