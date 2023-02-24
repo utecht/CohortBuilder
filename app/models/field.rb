@@ -14,6 +14,9 @@ class Field < ApplicationRecord
       FloatRecord.new(patient: patient, float_value: value.to_f, field: self).save
     when "date"
       DateRecord.new(patient: patient, date_value: value.to_date, field: self).save
+    when "boolean"
+      checked = value.chomp == "Checked"
+      BooleanRecord.new(patient: patient, boolean_value: checked, field: self).save
     when "option"
       option = Option.find_or_create_by(field: self, value: value)
       OptionRecord.new(patient: patient, option: option, field: self).save
