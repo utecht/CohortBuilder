@@ -1,3 +1,12 @@
+<p><strong>Name:</strong>
+  <%= field.name %>
+</p>
+
+
+<pre>
+  <%= field.example %>
+</pre>
+
 <%= form_with(model: field) do |form| %>
   <% if field.errors.any? %>
     <div style="color: red">
@@ -12,33 +21,13 @@
   <% end %>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
     <%= form.label :ctype, style: "display: block" %>
     <%= form.select :ctype, [["---", nil], ["Main ID", "id"], ["Date", "date"], ["Integer", "int"], ["String", "string"], ["Float", "float"]] %>
   </div>
 
   <div>
-    <%= form.label :example, style: "display: block" %>
-    <%= form.text_field :example %>
-  </div>
-
-  <div>
-    <%= form.label :stats, style: "display: block" %>
-    <%= form.text_field :stats %>
-  </div>
-
-  <div>
     <%= form.label :description, style: "display: block" %>
     <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.label :document_id, style: "display: block" %>
-    <%= form.text_field :document_id %>
   </div>
 
   <div>

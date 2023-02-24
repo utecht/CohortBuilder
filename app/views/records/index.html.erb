@@ -6,7 +6,7 @@
   <% @records.each do |record| %>
     <%= render record %>
     <p>
-      <%= link_to "Show this record", record %>
+      <%= link_to "Show this record", record_path(record) %>
     </p>
   <% end %>
 </div>

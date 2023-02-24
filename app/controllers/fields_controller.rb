@@ -1,5 +1,7 @@
+require 'csv'
+
 class FieldsController < ApplicationController
-  before_action :set_field, only: %i[ show edit update destroy ]
+  before_action :set_field, only: %i[ show edit update destroy create_records ]
 
   # GET /fields or /fields.json
   def index
@@ -54,6 +56,28 @@ class FieldsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to fields_url, notice: "Field was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def create_records
+    @field.records.destroy_all
+    count = 0
+    id_column = @field.ctype == 'id' ? @field.name : @field.document.id_column
+    return "No patient ID yet kind of error" if id_column.nil?
+    csv = CSV.parse(@field.document.file.download, headers: true)
+    csv.each do |row|
+      patient = Patient.find_or_create_by(patient_id: row[id_column], collection: @field.document.collection)
+      if @field.ctype != 'id' then
+        value = row[@field.name]
+        record = StringRecord.new(patient: patient, field: @field, string_value: value).save
+      end
+      count += 1
+      @field.processed = true
+      @field.save
+    end
+    respond_to do |format|
+      format.html { redirect_to document_url(@field.document), notice: "#{count} Records created." }
+      format.json { render :show, status: :ok, location: @field }
     end
   end
 

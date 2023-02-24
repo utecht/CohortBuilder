@@ -1,7 +1,7 @@
 require 'csv'
 
 class DocumentsController < ApplicationController
-  before_action :set_document, only: %i[ show edit update destroy process_csv load_patients ]
+  before_action :set_document, only: %i[ show edit update destroy process_csv ]
 
   # GET /documents or /documents.json
   def index
@@ -64,20 +64,17 @@ class DocumentsController < ApplicationController
     csv = CSV.parse(@document.file.download, headers: true)
     csv.headers.each do |header|
       field = Field.new(name: header, document: @document)
+      data = []
+      csv.each do |row|
+        data << row[header]
+      end
+      field.example = data
       field.save
     end
     @document.processed = true
     @document.save
     respond_to do |format|
       format.html { redirect_to document_url(@document), notice: "All fields processed." }
-      format.json { render :show, status: :ok, location: @document }
-    end
-  end
-
-  def load_patients
-    count = 0
-    respond_to do |format|
-      format.html { redirect_to document_url(@document), notice: "#{count} Patients created." }
       format.json { render :show, status: :ok, location: @document }
     end
   end

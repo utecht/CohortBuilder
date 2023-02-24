@@ -17,7 +17,7 @@ class FieldsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create field" do
     assert_difference("Field.count") do
-      post fields_url, params: { field: { description: @field.description, document_id: @field.document_id, example: @field.example, stats: @field.stats, type: @field.type } }
+      post fields_url, params: { field: { description: @field.description, document_id: @field.document_id, example: @field.example, stats: @field.stats, ctype: @field.ctype } }
     end
 
     assert_redirected_to field_url(Field.last)
@@ -34,8 +34,8 @@ class FieldsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update field" do
-    patch field_url(@field), params: { field: { description: @field.description, document_id: @field.document_id, example: @field.example, stats: @field.stats, type: @field.type } }
-    assert_redirected_to field_url(@field)
+    patch field_url(@field), params: { field: { description: @field.description, document_id: @field.document_id, example: @field.example, stats: @field.stats, ctype: @field.ctype } }
+    assert_redirected_to document_url(@field.document)
   end
 
   test "should destroy field" do

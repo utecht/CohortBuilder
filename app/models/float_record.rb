@@ -1,0 +1,2 @@
+class FloatRecord < Record
+end

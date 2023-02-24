@@ -1,0 +1,2 @@
+class IntRecord < Record
+end

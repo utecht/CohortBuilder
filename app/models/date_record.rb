@@ -1,0 +1,2 @@
+class DateRecord < Record
+end

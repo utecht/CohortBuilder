@@ -2,9 +2,7 @@
 
 <%= render @document %>
 
-<%= button_to "Process Fields", process_csv_path(@document) %>
-
-
+<% if @document.processed %>
 <h4>Fields</h4>
 <table id="fields">
   <thead>
@@ -13,6 +11,7 @@
       <th>CType</th>
       <th>Processed</th>
       <th>Edit</th>
+      <th>Load</th>
     </tr>
   </thead>
   <tbody>
@@ -22,12 +21,14 @@
     <td><%= field.ctype %></td>
     <td><%= field.processed %></td>
     <td><%= link_to "Edit", edit_field_path(field) %></td>
+    <td><%= button_to "Load", create_records_path(field) %></td>
   </tr>
   <% end %>
   </tbody>
 </table>
-
-<%= button_to "Load Patients", load_patients_path(@document) %>
+<% else %>
+<%= button_to "Process Fields", process_csv_path(@document) %>
+<% end %>
 
 <div>
   <%= link_to "Edit this document", edit_document_path(@document) %> |
