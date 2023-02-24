@@ -1,5 +1,6 @@
 class Field < ApplicationRecord
   belongs_to :document
+  belongs_to :field_group, optional: true
   has_many :options, dependent: :destroy
   has_many :records, dependent: :destroy
 

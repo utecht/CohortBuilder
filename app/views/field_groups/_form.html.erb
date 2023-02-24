@@ -1,0 +1,36 @@
+<%= form_with(model: field_group) do |form| %>
+  <% if field_group.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(field_group.errors.count, "error") %> prohibited this field_group from being saved:</h2>
+
+      <ul>
+        <% field_group.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :fields, style: "display: block" %>
+    <div style="display:flex;flex-wrap:wrap">
+    <%= form.collection_check_boxes :fields, @document.unaligned_fields, :id, :name %>
+    </div>
+  </div>
+
+  <%= form.hidden_field :document_id, valud: @document.id %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

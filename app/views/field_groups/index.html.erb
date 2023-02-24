@@ -1,0 +1,13 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Field groups</h1>
+
+<div id="field_groups">
+  <% @field_groups.each do |field_group| %>
+    <%= render field_group %>
+    <p>
+      <%= link_to "Show this field group", field_group %>
+    </p>
+  <% end %>
+</div>
+

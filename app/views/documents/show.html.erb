@@ -30,6 +30,8 @@
 <%= button_to "Process Fields", process_csv_path(@document) %>
 <% end %>
 
+<%= link_to "New Field Group", new_document_field_group_path(@document) %>
+
 <div>
   <%= link_to "Edit this document", edit_document_path(@document) %> |
   <%= link_to "Back to documents", documents_path %>

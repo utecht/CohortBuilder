@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+  resources :field_groups, only: [:index, :show, :update, :destroy, :create]
   resources :concept_matches
   resources :concepts
   resources :records
   resources :sting_records, controller: :records
   resources :options
   resources :fields
-  resources :documents
+  resources :documents do
+    resources :field_groups, only: [:edit, :new]
+  end
   resources :patients
   resources :collections
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

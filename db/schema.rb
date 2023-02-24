@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_24_021349) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_24_072119) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -74,6 +74,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_021349) do
     t.index ["collection_id"], name: "index_documents_on_collection_id"
   end
 
+  create_table "field_groups", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "document_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["document_id"], name: "index_field_groups_on_document_id"
+  end
+
   create_table "fields", force: :cascade do |t|
     t.string "ctype"
     t.json "example"
@@ -84,7 +93,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_021349) do
     t.datetime "updated_at", null: false
     t.boolean "processed", default: false
     t.string "name"
+    t.integer "field_group_id"
     t.index ["document_id"], name: "index_fields_on_document_id"
+    t.index ["field_group_id"], name: "index_fields_on_field_group_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -124,6 +135,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_021349) do
   add_foreign_key "concept_matches", "concepts"
   add_foreign_key "concept_matches", "options"
   add_foreign_key "documents", "collections"
+  add_foreign_key "field_groups", "documents"
   add_foreign_key "fields", "documents"
   add_foreign_key "options", "fields"
   add_foreign_key "patients", "collections"
