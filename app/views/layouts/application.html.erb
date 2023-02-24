@@ -6,11 +6,25 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <header>
+      <h1>Cohort Builder Data Curation Tool</h1>
+      <nav>
+        <%= link_to "Home", "/" %>
+        <%= link_to "Documents", documents_path %>
+        <%= link_to "Fields", fields_path %>
+        <%= link_to "Patients", patients_path %>
+        <%= link_to "Records", records_path %>
+        <%= link_to "Options", options_path %>
+        <%= link_to "Concepts", concepts_path %>
+        <%= link_to "Concept Matches", concept_matches_path %>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>

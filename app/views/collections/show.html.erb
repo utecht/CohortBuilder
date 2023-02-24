@@ -2,6 +2,15 @@
 
 <%= render @collection %>
 
+<div id="documents">
+  <% @collection.documents.each do |document| %>
+    <%= render document %>
+    <p>
+      <%= link_to "Show this document", document %>
+    </p>
+  <% end %>
+</div>
+
 <div>
   <%= link_to "Edit this collection", edit_collection_path(@collection) %> |
   <%= link_to "Back to collections", collections_path %>

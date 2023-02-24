@@ -10,6 +10,11 @@
   </p>
 
   <p>
+    <strong>Processed:</strong>
+    <%= document.processed %>
+  </p>
+
+  <p>
     <strong>File:</strong>
     <%= link_to document.file.filename, document.file if document.file.attached? %>
   </p>
