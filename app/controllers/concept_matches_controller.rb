@@ -19,6 +19,8 @@ class ConceptMatchesController < ApplicationController
 
   # GET /concept_matches/1/edit
   def edit
+    @concepts = Concept.all
+    @options = Option.all
   end
 
   # POST /concept_matches or /concept_matches.json
