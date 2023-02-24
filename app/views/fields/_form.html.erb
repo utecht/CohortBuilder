@@ -17,8 +17,8 @@
   </div>
 
   <div>
-    <%= form.label :type, style: "display: block" %>
-    <%= form.text_field :type %>
+    <%= form.label :ctype, style: "display: block" %>
+    <%= form.select :ctype, [["---", nil], ["Main ID", "id"], ["Date", "date"], ["Integer", "int"], ["String", "string"], ["Float", "float"]] %>
   </div>
 
   <div>

@@ -38,7 +38,7 @@ class FieldsController < ApplicationController
   def update
     respond_to do |format|
       if @field.update(field_params)
-        format.html { redirect_to field_url(@field), notice: "Field was successfully updated." }
+        format.html { redirect_to document_url(@field.document), notice: "Field was successfully updated." }
         format.json { render :show, status: :ok, location: @field }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,6 +65,6 @@ class FieldsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def field_params
-      params.require(:field).permit(:type, :example, :stats, :description, :document_id)
+      params.require(:field).permit(:ctype, :example, :stats, :description, :document_id)
     end
 end

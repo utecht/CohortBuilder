@@ -4,12 +4,13 @@
 
 <%= button_to "Process Fields", process_csv_path(@document) %>
 
+
 <h4>Fields</h4>
 <table id="fields">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Type</th>
+      <th>CType</th>
       <th>Processed</th>
       <th>Edit</th>
     </tr>
@@ -18,13 +19,15 @@
   <% @document.fields.each do |field| %>
   <tr>
     <td><%= field.name %></td>
-    <td><%= field.type %></td>
+    <td><%= field.ctype %></td>
     <td><%= field.processed %></td>
     <td><%= link_to "Edit", edit_field_path(field) %></td>
   </tr>
   <% end %>
   </tbody>
 </table>
+
+<%= button_to "Load Patients", load_patients_path(@document) %>
 
 <div>
   <%= link_to "Edit this document", edit_document_path(@document) %> |
