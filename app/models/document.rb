@@ -6,7 +6,7 @@ class Document < ApplicationRecord
   has_one_attached :file
 
   def id_column
-    self.fields.where(ctype: "id").first.name
+    self.fields.find_sole_by(ctype: "id").name
   end
 
   def unaligned_fields

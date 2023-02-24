@@ -12,11 +12,6 @@
   <% end %>
 
   <div>
-    <%= form.label :preview, style: "display: block" %>
-    <%= form.text_area :preview %>
-  </div>
-
-  <div>
     <%= form.label :collection_id, style: "display: block" %>
     <%= form.collection_select :collection_id, @collections, :id, :name %>
   </div>

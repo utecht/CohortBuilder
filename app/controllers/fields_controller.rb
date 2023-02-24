@@ -62,17 +62,25 @@ class FieldsController < ApplicationController
   def create_records
     @field.records.destroy_all
     count = 0
-    id_column = @field.ctype == 'id' ? @field.name : @field.document.id_column
-    return "No patient ID yet kind of error" if id_column.nil?
+    begin
+      id_column = @field.ctype == 'id' ? @field.name : @field.document.id_column
+    rescue ActiveRecord::RecordNotFound
+      respond_to do |format|
+        format.html { redirect_to document_url(@field.document), alert: "No ID Column found for this document." }
+        format.json { render json: {error: "No ID column found"}, status: :unprocessable_entity }
+      end
+      return
+    end
     csv = CSV.parse(@field.document.file.download, headers: true)
     csv.each do |row|
       patient = Patient.find_or_create_by(patient_id: row[id_column], collection: @field.document.collection)
+      @field.processed = true
       if @field.ctype != 'id' then
         value = row[@field.name]
-        @field.create_record(patient, value)
+        count += 1 if @field.create_record(patient, value)
+      else
+        count += 1
       end
-      count += 1
-      @field.processed = true
       @field.save
     end
     respond_to do |format|

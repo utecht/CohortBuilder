@@ -4,6 +4,7 @@ class FieldTest < ActiveSupport::TestCase
   test "expect to create string record" do
     patient = patients(:one)
     field = fields(:one)
+    field.ctype = 'string'
     field.create_record(patient, "a string")
     assert_equal Record.last.class, StringRecord
     assert_equal Record.last.value, "a string"
