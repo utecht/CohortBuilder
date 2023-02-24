@@ -15,10 +15,12 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   def new
     @document = Document.new
+    @collections = Collection.all
   end
 
   # GET /documents/1/edit
   def edit
+    @collections = Collection.all
   end
 
   # POST /documents or /documents.json

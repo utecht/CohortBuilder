@@ -13,12 +13,12 @@
 
   <div>
     <%= form.label :concept_id, style: "display: block" %>
-    <%= form.text_field :concept_id %>
+    <%= form.collection_select :concept_id, @concepts, :id, :label %>
   </div>
 
   <div>
     <%= form.label :option_id, style: "display: block" %>
-    <%= form.text_field :option_id %>
+    <%= form.collection_select :option_id, @options, :id, :value %>
   </div>
 
   <div>

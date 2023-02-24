@@ -69,7 +69,7 @@ class FieldsController < ApplicationController
       patient = Patient.find_or_create_by(patient_id: row[id_column], collection: @field.document.collection)
       if @field.ctype != 'id' then
         value = row[@field.name]
-        record = StringRecord.new(patient: patient, field: @field, string_value: value).save
+        @field.create_record(patient, value)
       end
       count += 1
       @field.processed = true

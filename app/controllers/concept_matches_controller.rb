@@ -13,6 +13,8 @@ class ConceptMatchesController < ApplicationController
   # GET /concept_matches/new
   def new
     @concept_match = ConceptMatch.new
+    @concepts = Concept.all
+    @options = Option.all
   end
 
   # GET /concept_matches/1/edit
