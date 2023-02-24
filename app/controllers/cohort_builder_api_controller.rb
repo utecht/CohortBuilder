@@ -32,7 +32,7 @@ class CohortBuilderApiController < ApplicationController
 			choices: field.options.map { |option| ret_choice(option) },
 			type: "radio",
 			api: "api_query/#{field.id}",
-			name: field.description,
+			name: field.description? ? field.description : field.name,
 			label: field.name
 		}
 	end
@@ -41,7 +41,7 @@ class CohortBuilderApiController < ApplicationController
 		{
 			type: "calc",
 			api: "api_query_calc/#{field.id}",
-			name: field.description,
+			name: field.description? ? field.description : field.name,
 			label: field.name
 		}
 	end
@@ -50,7 +50,7 @@ class CohortBuilderApiController < ApplicationController
 		{
 			type: "date",
 			api: "api_query_date/#{field.id}",
-			name: field.description,
+			name: field.description? ? field.description : field.name,
 			label: field.name
 		}
 	end
